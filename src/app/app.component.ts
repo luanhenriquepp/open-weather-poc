@@ -69,16 +69,12 @@ export interface Sys {
 })
 export class AppComponent implements OnInit {
 
-  lat: number = 0;
-  lng: number = 0;
   weatherInfo!: WeatherInfo;
 
-
-  constructor(private _http: HttpClient) {}
-  title = 'open-weather-poc-api';
+  constructor(private _http: HttpClient) {this.getLocation();}
 
   ngOnInit(): void {
-    this.getLocation();
+    
   }
 
   getLocation() {
@@ -94,8 +90,7 @@ export class AppComponent implements OnInit {
             
           })
         }
-      },
-        (error: GeolocationPositionError) => console.log(error));
+      },(error: GeolocationPositionError) => console.log(error));
     } else {
       alert("Geolocation is not supported by this browser.");
     }
