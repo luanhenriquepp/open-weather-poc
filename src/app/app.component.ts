@@ -84,10 +84,7 @@ export class AppComponent implements OnInit {
   getLocation() {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position: GeolocationPosition) => {
-        
         if (position) {
-          this.lat = position.coords.latitude;
-          this.lng = position.coords.longitude;
           this.getOpenWeatherInfo(position.coords.latitude, position.coords.longitude).pipe(map((item: WeatherInfo)=> {
            item.weather[0].url =  `http://openweathermap.org/img/wn/${item.weather[0].icon}@2x.png`;
            item.currentTime = new Date(item.dt * 1000);
